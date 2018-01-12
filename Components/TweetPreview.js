@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 export default class TweetPreview extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <Text style={styles.tweet}>Hello CUSAT! I am Sidharth, here at CUSAT to introduce you guys to the super cool technology React Native. Trust me, I am excited to be here :)</Text>
+        <Image style={styles.image} source={{uri: this.props.image}} />
+        <View style={styles.content}>
+          <Text style={styles.author}>{this.props.author}</Text>
+          <Text style={styles.tweet}>{this.props.text}</Text>
+        </View>
       </View>
     )
   }
@@ -13,13 +17,29 @@ export default class TweetPreview extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 30,
-    borderBottomColor: 'black',
-    borderBottomWidth: .2,
+    flexDirection: 'row',
+    flex: 1,
+    padding: 20,
+    borderBottomColor: '#efeff4',
+    borderBottomWidth: .5,
+  },
+  content: {
+    flex: 1,
   },
   tweet: {
     color: 'white',
     fontSize: 16,
     lineHeight: 18,
+  },
+  author: {
+    color: 'white',
+    fontSize: 20,
+    marginBottom: 5,
+  },
+  image: {
+    width:50,
+    height: 50,
+    borderRadius: 100,
+    marginRight: 10,
   }
 })
