@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet, FlatList } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
 
 import TweetPreview from './TweetPreview.js';
 
@@ -29,27 +29,30 @@ export default class Home extends Component {
           handle: 'theboy',
           image: 'http://placeimg.com/50/50/people/grayscale',
         },
-        {
-          key: 4,
-          tweet: 'Hello CUSAT! I am Sidharth, here at CUSAT to introduce you guys to the super cool technology React Native. Trust me, I am excited to be here :)',
-          author: 'Sidharth',
-          handle: 'sidharth',
-          image: 'http://placeimg.com/50/50/people/grayscale',
-        },
       ]
     }
   }
 
   renderItem = ({item}) => {
     return(
-      <TweetPreview text={item.tweet} author={item.author} image={item.image} />
+      <TouchableOpacity
+        onPress={()=>this.props.navigation.navigate('Tweet', {tweet: item})}
+      >
+        <View>
+
+
+        <TweetPreview text={item.tweet} author={item.author} image={item.image}/>
+      </View>
+
+    </TouchableOpacity>
+
     )
   }
 
   render() {
 
     return(
-      <View>
+      <View style={{backgroundColor: 'white', flex:1}}>
         <FlatList
           data={this.state.tweets}
           renderItem={this.renderItem}

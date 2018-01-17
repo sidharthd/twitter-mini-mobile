@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, StyleSheet, FlatList } from 'react-native';
 
-import Tabs from './Components/Router.js';
+import { Tabs, Stack } from './Components/Router.js';
 
 export default class App extends Component {
   render() {
@@ -16,6 +16,5 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0c0b38',
   },
 })

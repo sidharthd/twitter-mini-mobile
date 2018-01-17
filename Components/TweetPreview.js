@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
+import Stack from './Router.js';
+
 export default class TweetPreview extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     return(
       <View style={styles.container}>
@@ -27,12 +32,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tweet: {
-    color: 'white',
     fontSize: 16,
     lineHeight: 18,
   },
   author: {
-    color: 'white',
     fontSize: 20,
     marginBottom: 5,
   },
