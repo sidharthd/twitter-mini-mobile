@@ -10,7 +10,7 @@ export default class TweetPreview extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <Image style={styles.image} source={{uri: this.props.image}} />
+        {/* <Image style={styles.image} source={{uri: this.props.image}} /> */}
         <View style={styles.content}>
           <Text style={styles.author}>{this.props.author}</Text>
           <Text style={styles.tweet}>{this.props.text}</Text>

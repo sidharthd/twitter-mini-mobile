@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity, Button } from 'react-native';
 
 import TweetPreview from './TweetPreview.js';
+import NewButton from './NewButton.js';
 
 export default class Home extends Component {
+  static navigationOptions = ({  navigation }) => ({
+    title: 'Home',
+    headerRight: <Button title="Profile" onPress={() => navigation.navigate('Profile')}/>,
+      headerStyle: styles.header,
+  });
   constructor(props) {
     super(props);
     this.state = {
@@ -57,10 +63,14 @@ export default class Home extends Component {
           data={this.state.tweets}
           renderItem={this.renderItem}
         />
+        <NewButton />
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  header: {
+    paddingRight: 10,
+  }
 })

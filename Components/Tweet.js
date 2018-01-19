@@ -4,11 +4,20 @@ import { View, StyleSheet } from 'react-native';
 import TweetPreview from './TweetPreview.js';
 
 export default class Tweet extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tweet: this.props.navigation.state.params.tweet,
+    }
+  }
+  static navigationOptions = ({  navigation }) => ({
+    title: `Tweet by ${navigation.state.params.tweet.author}`,
+  });
+
   render() {
-    const { tweet } = this.props.navigation.state.params;
     return(
       <View style={styles.container}>
-        <TweetPreview text={tweet.tweet} author={tweet.author} image={tweet.image}/>
+        <TweetPreview text={this.state.tweet.tweet} author={this.state.tweet.author} image={this.state.tweet.image}/>
       </View>
     )
   }

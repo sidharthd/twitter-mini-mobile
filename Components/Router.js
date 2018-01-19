@@ -7,21 +7,13 @@ import Profile from './Profile.js';
 import Tweet from './Tweet.js';
 
 export const Stack = StackNavigator({
-  Tweets: {
+  Home: {
     screen: Home,
   },
   Tweet: {
     screen: Tweet,
   },
-},{
-  headerMode: 'none',
-})
-
-export const Tabs = TabNavigator({
-  Home: {
-    screen: Stack,
-  },
   Profile: {
     screen: Profile,
   },
-});
+})
