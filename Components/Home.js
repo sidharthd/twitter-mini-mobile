@@ -63,7 +63,7 @@ export default class Home extends Component {
           data={this.state.tweets}
           renderItem={this.renderItem}
         />
-        <NewButton />
+        <NewButton onPress = {() => this.props.navigation.navigate('NewTweet')} />
       </View>
     )
   }
