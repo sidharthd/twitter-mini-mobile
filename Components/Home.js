@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity, Button } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, FlatList, TouchableHighlight, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
+import axios from 'axios';
+
+import { url } from '../config.js';
 
 import TweetPreview from './TweetPreview.js';
 import NewButton from './NewButton.js';
@@ -13,30 +16,21 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tweets: [
-        {
-          key: 1,
-          tweet: 'Hello! I am Sidharth, here at CUSAT to introduce you guys to the super cool technology React Native. Trust me, I am excited to be here :)',
-          author: 'Sidharth',
-          handle: 'sidharth',
-          image: 'http://placeimg.com/50/50/people/grayscale',
-        },
-        {
-          key: 2,
-          tweet: 'You either die a hero, or live long enough to see yourself become the villian.',
-          author: 'Harvey',
-          handle: 'harvey',
-          image: 'http://placeimg.com/50/50/people/grayscale',
-        },
-        {
-          key: 3,
-          tweet: "You don't seize the moment; the moment seizes you",
-          author: 'The boy',
-          handle: 'theboy',
-          image: 'http://placeimg.com/50/50/people/grayscale',
-        },
-      ]
+      loading: true
     }
+    this.url = `${url}/api/1/tweets/`;
+  }
+
+  componentDidMount() {
+    axios.get(this.url)
+      .then( response => {
+        console.log(response.data)
+        this.setState({
+          tweets: response.data.tweets,
+          loading: false
+        })
+      }
+    )
   }
 
   renderItem = ({item}) => {
@@ -58,11 +52,17 @@ export default class Home extends Component {
   render() {
 
     return(
-      <View style={{backgroundColor: 'white', flex:1}}>
-        <FlatList
-          data={this.state.tweets}
-          renderItem={this.renderItem}
-        />
+      <View style={styles.container}>
+        {
+          this.state.loading?
+            <ActivityIndicator size="large" style={styles.spinner} />
+          :
+            <FlatList
+              data={this.state.tweets}
+              renderItem={this.renderItem}
+            />
+        }
+
         <NewButton onPress = {() => this.props.navigation.navigate('NewTweet')} />
       </View>
     )
@@ -70,6 +70,11 @@ export default class Home extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex:1,
+    justifyContent: 'center',
+  },
   header: {
     paddingRight: 10,
   }
